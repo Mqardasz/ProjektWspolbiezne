@@ -170,7 +170,7 @@ public class ZabbixService {
                 case KEY_DISK    -> disk   = value;
                 case KEY_NET_IN  -> netIn  = bytesToMbps(value);
                 case KEY_NET_OUT -> netOut = bytesToMbps(value);
-                default -> { /* ignored */ }
+                default -> log.debug("Ignoring unrecognised Zabbix item key: {}", key);
             }
         }
 
