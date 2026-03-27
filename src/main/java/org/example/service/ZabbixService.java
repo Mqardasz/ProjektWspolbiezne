@@ -44,16 +44,16 @@ public class ZabbixService {
     private static final String KEY_NET_IN  = "net.if.in[eth0]";
     private static final String KEY_NET_OUT = "net.if.out[eth0]";
 
-    @Value("${zabbix.api.url:http://localhost/zabbix/api_jsonrpc.php}")
+    @Value("${zabbix.api.url}")
     private String zabbixApiUrl;
 
-    @Value("${zabbix.api.user:Admin}")
+    @Value("${zabbix.api.user}")
     private String zabbixUser;
 
-    @Value("${zabbix.api.password:zabbix}")
+    @Value("${zabbix.api.password}")
     private String zabbixPassword;
 
-    @Value("${zabbix.host.name:Linux server}")
+    @Value("${zabbix.host.name}")
     private String zabbixHostName;
 
     private final AtomicReference<Metrics> latestMetrics = new AtomicReference<>(emptyMetrics());
