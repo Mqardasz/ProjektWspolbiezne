@@ -77,6 +77,34 @@
                     <div id="net-out-bar" class="progress-bar net-out" title="Network OUT"></div>
                 </div>
             </section>
+            <section class="graphs">
+                <h2>Graphs (last ~5 minutes)</h2>
+
+                <div class="graph">
+                    <div class="graph-title">CPU (%)</div>
+                    <canvas id="cpu-chart" width="800" height="160"></canvas>
+                </div>
+
+                <div class="graph">
+                    <div class="graph-title">RAM (%)</div>
+                    <canvas id="ram-chart" width="800" height="160"></canvas>
+                </div>
+
+                <div class="graph">
+                    <div class="graph-title">Disk (%)</div>
+                    <canvas id="disk-chart" width="800" height="160"></canvas>
+                </div>
+
+                <div class="graph">
+                    <div class="graph-title">Network IN (Mbps)</div>
+                    <canvas id="netin-chart" width="800" height="160"></canvas>
+                </div>
+
+                <div class="graph">
+                    <div class="graph-title">Network OUT (Mbps)</div>
+                    <canvas id="netout-chart" width="800" height="160"></canvas>
+                </div>
+            </section>
         </main>
 
         <footer>
