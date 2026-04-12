@@ -232,7 +232,10 @@ function drawLineChart(canvas, values, opts) {
     ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
         const y = (h * i) / 4;
-        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
     }
 
     ctx.fillStyle = "#bbb";
@@ -255,7 +258,8 @@ function drawLineChart(canvas, values, opts) {
         const x = x0 + i * dx;
         const t = (v - minY) / (maxY - minY || 1);
         const y = h - 8 - t * (h - 24);
-        if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
     }
     ctx.stroke();
 

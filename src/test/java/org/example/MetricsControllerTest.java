@@ -14,6 +14,11 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+/**
+ * Uses DEFINED_PORT so the ZabbixService's WebClient can reach the in-process
+ * dummy Zabbix controllers (configured at localhost:8080 in application.properties).
+ * With RANDOM_PORT the dummy endpoints would be unreachable at that URL.
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureWebTestClient
 class MetricsControllerTest {
