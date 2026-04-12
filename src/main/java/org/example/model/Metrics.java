@@ -5,6 +5,7 @@ package org.example.model;
  */
 public class Metrics {
 
+    private String hostName;
     private double cpu;
     private double ram;
     private double disk;
@@ -14,8 +15,9 @@ public class Metrics {
 
     public Metrics() {}
 
-    public Metrics(double cpu, double ram, double disk,
+    public Metrics(String hostName, double cpu, double ram, double disk,
                    double networkIn, double networkOut, long timestamp) {
+        this.hostName = hostName;
         this.cpu = cpu;
         this.ram = ram;
         this.disk = disk;
@@ -23,6 +25,9 @@ public class Metrics {
         this.networkOut = networkOut;
         this.timestamp = timestamp;
     }
+
+    public String getHostName() { return hostName; }
+    public void setHostName(String hostName) { this.hostName = hostName; }
 
     public double getCpu() { return cpu; }
     public void setCpu(double cpu) { this.cpu = cpu; }

@@ -35,16 +35,14 @@ body {
     color: var(--text);
     font-family: var(--font);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 1.5rem;
 }
 
 /* ─── Dashboard wrapper ────────────────────────────────────────────────────── */
 .dashboard {
     width: 100%;
-    max-width: 640px;
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -74,18 +72,46 @@ header .subtitle {
     color: var(--muted);
 }
 
-/* ─── Metric cards ─────────────────────────────────────────────────────────── */
-main {
+/* ─── Hosts container ──────────────────────────────────────────────────────── */
+#hosts-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* ─── Host panel ───────────────────────────────────────────────────────────── */
+.host-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
 }
 
+.host-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.03em;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.host-metrics {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* ─── Metric cards ─────────────────────────────────────────────────────────── */
 .metric-card {
-    background: var(--surface);
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1rem 1.25rem;
+    padding: 0.85rem 1rem;
 }
 
 .metric-header {
@@ -202,14 +228,20 @@ footer {
 .status-dot.online  { background: #22c55e; }
 .status-dot.offline { background: var(--critical); }
 
-.graphs { margin-top: 24px; }
-.graph { margin: 14px 0; }
-.graph-title { font-weight: 600; margin-bottom: 6px; }
+/* ─── Per-host graphs ──────────────────────────────────────────────────────── */
+.graphs { margin-top: 12px; }
+.graphs h3 { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-bottom: 8px; }
+.graph { margin: 10px 0; }
+.graph-title { font-size: 0.8rem; font-weight: 600; margin-bottom: 4px; color: var(--muted); }
 canvas { width: 100%; border: 1px solid #2b2b2b; border-radius: 6px; background: #111; }
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
     header h1 {
         font-size: 1.35rem;
+    }
+
+    #hosts-container {
+        grid-template-columns: 1fr;
     }
 }

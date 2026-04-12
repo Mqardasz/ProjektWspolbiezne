@@ -10,10 +10,11 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import reactor.test.StepVerifier;
 
 import java.time.Duration;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureWebTestClient
 class MetricsControllerTest {
 
@@ -23,7 +24,7 @@ class MetricsControllerTest {
     @Autowired
     private ZabbixService zabbixService;
 
-    /** Verifies the JSON structure returned by GET /metrics. */
+    /** Verifies the JSON array structure returned by GET /metrics. */
     @Test
     void metricsEndpointReturnsJson() {
         webTestClient.get()
@@ -31,12 +32,13 @@ class MetricsControllerTest {
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.cpu").exists()
-                .jsonPath("$.ram").exists()
-                .jsonPath("$.disk").exists()
-                .jsonPath("$.networkIn").exists()
-                .jsonPath("$.networkOut").exists()
-                .jsonPath("$.timestamp").exists();
+                .jsonPath("$[0].hostName").exists()
+                .jsonPath("$[0].cpu").exists()
+                .jsonPath("$[0].ram").exists()
+                .jsonPath("$[0].disk").exists()
+                .jsonPath("$[0].networkIn").exists()
+                .jsonPath("$[0].networkOut").exists()
+                .jsonPath("$[0].timestamp").exists();
     }
 
     /** Verifies that the service returns a non-null snapshot with a valid timestamp. */
@@ -45,6 +47,17 @@ class MetricsControllerTest {
         Metrics m = zabbixService.getLatestMetrics();
         assertThat(m).isNotNull();
         assertThat(m.getTimestamp()).isGreaterThan(0L);
+    }
+
+    /** Verifies that all configured hosts are returned. */
+    @Test
+    void metricsEndpointReturnsAllHosts() {
+        webTestClient.get()
+                .uri("/metrics")
+                .exchange()
+                .expectStatus().isOk()
+                .expectBodyList(Metrics.class)
+                .hasSize(3);
     }
 
     /**

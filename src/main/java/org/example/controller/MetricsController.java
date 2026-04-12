@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Duration;
+import java.util.List;
 
 /**
  * Exposes the latest server metrics collected by {@link ZabbixService}.
  *
- * <pre>GET /metrics</pre>
+ * <pre>GET /metrics        – snapshot of all hosts</pre>
+ * <pre>GET /metrics/stream – SSE stream of all hosts</pre>
  */
 @RestController
 public class MetricsController {
@@ -25,12 +26,12 @@ public class MetricsController {
     }
 
     @GetMapping(value = "/metrics", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<Metrics> getMetrics() {
-        return Mono.just(zabbixService.getLatestMetrics());
+    public Mono<List<Metrics>> getMetrics() {
+        return Mono.just(zabbixService.getAllLatestMetrics());
     }
 
     @GetMapping(value = "/metrics/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<Metrics> streamMetrics() {
+    public Flux<List<Metrics>> streamMetrics() {
         return zabbixService.metricsStream();
     }
 }
