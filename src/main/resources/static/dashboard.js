@@ -77,6 +77,8 @@ function render(data) {
     pushPoint(series.netIn, data.networkIn ?? 0);
     pushPoint(series.netOut, data.networkOut ?? 0);
     redrawCharts();
+
+    console.log("render", data);
 }
 
 // ─── Connection status helpers ────────────────────────────────────────────────
