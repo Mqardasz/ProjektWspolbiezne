@@ -11,6 +11,7 @@ public class Metrics {
     private double networkIn;
     private double networkOut;
     private long timestamp;
+    private String hostName;
 
     public Metrics() {}
 
@@ -22,6 +23,12 @@ public class Metrics {
         this.networkIn = networkIn;
         this.networkOut = networkOut;
         this.timestamp = timestamp;
+    }
+
+    public Metrics(double cpu, double ram, double disk,
+                   double networkIn, double networkOut, long timestamp, String hostName) {
+        this(cpu, ram, disk, networkIn, networkOut, timestamp);
+        this.hostName = hostName;
     }
 
     public double getCpu() { return cpu; }
@@ -41,4 +48,7 @@ public class Metrics {
 
     public long getTimestamp() { return timestamp; }
     public void setTimestamp(long timestamp) { this.timestamp = timestamp; }
+
+    public String getHostName() { return hostName; }
+    public void setHostName(String hostName) { this.hostName = hostName; }
 }
