@@ -35,16 +35,14 @@ body {
     color: var(--text);
     font-family: var(--font);
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     padding: 1.5rem;
 }
 
 /* ─── Dashboard wrapper ────────────────────────────────────────────────────── */
 .dashboard {
     width: 100%;
-    max-width: 640px;
+    max-width: 900px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -74,15 +72,39 @@ header .subtitle {
     color: var(--muted);
 }
 
-/* ─── Metric cards ─────────────────────────────────────────────────────────── */
-main {
+/* ─── Host panel ───────────────────────────────────────────────────────────── */
+#hosts-container {
     display: flex;
     flex-direction: column;
-    gap: 0.9rem;
+    gap: 1.5rem;
 }
 
-.metric-card {
+.host-panel {
     background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+}
+
+.host-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+}
+
+.metrics-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+/* ─── Metric cards ─────────────────────────────────────────────────────────── */
+.metric-card {
+    background: var(--bg);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     padding: 1rem 1.25rem;
@@ -202,14 +224,14 @@ footer {
 .status-dot.online  { background: #22c55e; }
 .status-dot.offline { background: var(--critical); }
 
-.graphs { margin-top: 24px; }
-.graph { margin: 14px 0; }
-.graph-title { font-weight: 600; margin-bottom: 6px; }
-canvas { width: 100%; border: 1px solid #2b2b2b; border-radius: 6px; background: #111; }
+.graphs { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.graph { margin: 0; }
+.graph-title { font-weight: 600; margin-bottom: 6px; font-size: 0.8rem; color: var(--muted); }
+canvas { width: 100%; border: 1px solid #2b2b2b; border-radius: 6px; background: #111; display: block; }
 
 /* ─── Responsive ───────────────────────────────────────────────────────────── */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.35rem;
-    }
+@media (max-width: 600px) {
+    header h1 { font-size: 1.35rem; }
+    .metrics-row { grid-template-columns: 1fr; }
+    .graphs { grid-template-columns: 1fr; }
 }
