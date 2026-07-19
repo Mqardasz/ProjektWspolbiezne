@@ -10,12 +10,8 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 
-/**
- * Exposes the latest server metrics collected by {@link ZabbixService}.
- *
- * <pre>GET /metrics        – snapshot of all hosts</pre>
- * <pre>GET /metrics/stream – SSE stream of all hosts</pre>
- */
+// GET /metrics - wszystkie hosty (pierwszy get po załadowaniu)
+// GET /metrics/stream – strumień hostów
 @RestController
 public class MetricsController {
 

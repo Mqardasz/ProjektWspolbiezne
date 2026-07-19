@@ -36,12 +36,11 @@ public class DummyZabbixApiController {
         long t = Instant.now().getEpochSecond();
         ThreadLocalRandom r = ThreadLocalRandom.current();
 
-        // “Changing” values with small randomness + gentle drift
+        // logika symulacji danych
         double cpu  = clamp(5 + (t % 60) * 0.8 + r.nextDouble(-3, 3), 0, 100);
         double ram  = clamp(20 + (t % 120) * 0.4 + r.nextDouble(-2, 2), 0, 100);
         double disk = clamp(35 + (t % 300) * 0.05 + r.nextDouble(-0.5, 0.5), 0, 100);
 
-        // bytes/sec (your service converts to Mbps)
         double netInBps  = clamp(200_000 + (t % 30) * 30_000 + r.nextDouble(-50_000, 50_000), 0, 50_000_000);
         double netOutBps = clamp(150_000 + (t % 45) * 25_000 + r.nextDouble(-50_000, 50_000), 0, 50_000_000);
 
